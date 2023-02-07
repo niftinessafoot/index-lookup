@@ -1,4 +1,5 @@
 import { indexLookup } from '../src/index';
+import { _C } from '../constants.js';
 
 describe('IndexLookup', () => {
   let key;
@@ -31,9 +32,7 @@ describe('IndexLookup', () => {
 
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => true);
     const lookup = indexLookup(key, data);
-    expect(warn).toHaveBeenCalledWith(
-      `"${key}" is not a key in all supplied objects.`
-    );
+    expect(warn).toHaveBeenCalledWith(`"${key}" ${_C.ErrorNoKey}`);
     expect(lookup).toEqual(expect.arrayContaining(expectedOutput));
   });
 
@@ -44,6 +43,6 @@ describe('IndexLookup', () => {
       indexLookup(key, data);
     };
 
-    expect(lookup).toThrow('Supplied data is not an array.');
+    expect(lookup).toThrow(_C.ErrorNotArray);
   });
 });

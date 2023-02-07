@@ -1,20 +1,26 @@
 {
-  "name": "index-lookup",
+  "name": "@afoot/index-lookup",
   "version": "0.1.0",
-  "description": "",
-  "author": "Matthew Smith @niftinessafoot",
+  "description": "Generate an index of ids from an array of objects for quick lookup.",
+  "author": "Matthew Smith <code@niftinessafoot.com> (https://www.niftinessafoot.com)",
   "keywords": [
     "module",
-    "typescript"
+    "typescript",
+    "array"
   ],
   "entry": "index.ts",
   "license": "MIT",
   "scripts": {
+    "prebuild": "npm run clean",
     "build": "rollup -c rollup.config.js -i src/index.ts",
+    "build:prod": "npm run build && npm run types",
+    "prepack": "npm run build:prod && npm run prep:umd",
+    "clean": "rm -rf dist/*",
+    "types": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "clean": "rm -f dist/*",
-    "types": "tsc"
+    "docs": "typedoc",
+    "prep:umd": "node ./scripts/init-umd-config.js"
   },
   "browserslist": [
     "defaults"
@@ -24,8 +30,27 @@
     "url": "https://github.com/niftinessafoot/"
   },
   "type": "module",
-  "files": [],
+  "files": [
+    "dist/"
+  ],
   "types": "dist/types/index.d.ts",
+  "main": "dist/umd/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/umd/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/umd/index.js"
+    },
+    "./standalone": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/umd/standalone.js",
+      "import": "./dist/esm/standalone.js",
+      "default": "./dist/umd/legacy.js"
+    },
+    "./legacy": "./dist/umd/legacy.js"
+  },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",

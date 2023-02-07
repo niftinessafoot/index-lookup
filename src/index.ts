@@ -4,7 +4,7 @@ interface IndexLookup {
 }
 
 /**
- * Generate an index of ids from an array of objects for lookups.
+ * Generate an index of ids from an array of objects for quick lookup.
  *
  * @param key - A common key in all contained objects. Values form the array elements.
  * @param objects - An array of object literals, each with a common key property holding a unique value.
