@@ -27,8 +27,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/niftinessafoot/"
+    "url": "https://github.com/niftinessafoot/index-lookup"
   },
+  "homepage": "https://github.com/niftinessafoot/index-lookup",
   "type": "module",
   "files": [
     "dist/"
